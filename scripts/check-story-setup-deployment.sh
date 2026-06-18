@@ -354,6 +354,16 @@ assert_grep '/story-setup' "$UPGRADING_FILE" "UPGRADING.md must tell users to re
 assert_grep 'hook.*lib|lib/common\.sh|lib/sentinel\.sh' "$UPGRADING_FILE" "UPGRADING.md must document hook lib repair"
 assert_grep 'reference bundle|Agent Reference|agent-references' "$UPGRADING_FILE" "UPGRADING.md must document reference bundle repair"
 assert_grep '新版写作 Agent|写作 Agent|对标文风' "$UPGRADING_FILE" "UPGRADING.md must briefly document the v10 writing-agent refresh"
+assert_grep '关键信息与扩写技法' "$UPGRADING_FILE" "UPGRADING.md must document v12 key-information expansion"
+assert_grep '剧情/节奏\.md|`剧情/节奏\.md`|节奏\.md' "$UPGRADING_FILE" "UPGRADING.md must document v12 rhythm artifact"
+assert_grep '剧情/情绪模块\.md|`剧情/情绪模块\.md`|情绪模块\.md' "$UPGRADING_FILE" "UPGRADING.md must document v12 emotion module artifact"
+assert_grep 'selected_emotion_module' "$UPGRADING_FILE" "UPGRADING.md must document story-explorer selected_emotion_module"
+assert_grep 'rhythm_reference' "$UPGRADING_FILE" "UPGRADING.md must document story-explorer rhythm_reference"
+assert_grep 'contract_version.*v12|gaps\.contract_version == "v12"' "$SKILL_DIR/references/templates/agents/story-explorer.md" "story-explorer must classify v12 benchmark contracts before fallback"
+assert_grep 'contract_version.*legacy|legacy_deconstruction: true|legacy_deconstruction": true' "$SKILL_DIR/references/templates/agents/story-explorer.md" "story-explorer must classify legacy benchmark fallback explicitly"
+assert_grep 'missing_primary_contract: true|missing_primary_contract": true' "$SKILL_DIR/references/templates/agents/story-explorer.md" "story-explorer must emit missing_primary_contract for broken v12 canonical artifacts"
+assert_grep 'repair_action.*Stage 3|Stage 3.*repair_action|重跑 /story-long-analyze Stage 3' "$SKILL_DIR/references/templates/agents/story-explorer.md" "story-explorer must provide a v12 repair action instead of silent fallback"
+assert_grep 'legacy_deconstruction: true|missing_primary_contract' "$REPO_ROOT/skills/story-long-write/SKILL.md" "story-long-write must not silently fallback for v12 primary contract gaps"
 echo "  OK TS10 upgrade notes"
 
 # TS11 — Outline-before-prose write guard (BLOCKING PreToolUse hook)
